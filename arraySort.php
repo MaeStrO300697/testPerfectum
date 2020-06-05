@@ -92,6 +92,11 @@ class SortArray
 }
 
 $arraySort = new SortArray();
-$mixedArray = $arraySort->mixedArrays([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
+echo "<pre>";
+$arraySort->mixedArrays([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
     ['q','w','e','r','t','y','u','i','o','p','a','s','d','f','g','h','j','k','l','z']);
-var_dump($mixedArray);
+var_dump(
+    $arraySort->getArrayOne(),
+    $arraySort->getArrayTwo(),
+    $arraySort->getMixedArray()
+);
