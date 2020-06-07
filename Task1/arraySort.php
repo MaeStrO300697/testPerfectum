@@ -2,12 +2,10 @@
 
 /**
  * Created by PhpStorm.
- * User: maestro300697
+ * User: Artemii Karkusha
  * Date: 05.06.2020
  * Time: 13:49
  */
-
-
 
 class SortArray
 {
@@ -92,7 +90,6 @@ class SortArray
 }
 
 $arraySort = new SortArray();
-echo "<pre>";
 $arraySort->mixedArrays([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
     ['q','w','e','r','t','y','u','i','o','p','a','s','d','f','g','h','j','k','l','z']);
 var_dump(
