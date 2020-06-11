@@ -17,15 +17,21 @@ class Comment extends CI_Controller
     {
         $this->load->model('comment_model');
         $data['comments'] = $this->comment_model->getCommentsWithUsers();
+        //echo "<pre>";
         if (!empty($data['comments'])) {
             $this->load->library('pagination');
-            $config['base_url'] = base_url();
-            $config['total_rows'] = count($data['comments']);
-
-            $config['per_page'] = 5;
-            $this->pagination->initialize($config);
-            $data['links'] = $this->pagination->create_links();
+            $this->pagination->setBaseUrl(base_url());
+            $this->pagination->setTotalElements(171);
+            $this->pagination->setElementsForShow(10);
+            $this->pagination->setNumLinks(3);
+            $this->pagination->setPath('index.php/comment/pagination/');
+            $this->pagination->setCurPage(12);
+            $data['links'] = $this->pagination->createLinks();
         }
         $this->load->view('comment', $data);
+    }
+
+    public function pagination($page){
+        echo $page;
     }
 }
