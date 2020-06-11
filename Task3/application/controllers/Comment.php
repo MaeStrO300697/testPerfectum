@@ -17,21 +17,46 @@ class Comment extends CI_Controller
     {
         $this->load->model('comment_model');
         $data['comments'] = $this->comment_model->getCommentsWithUsers();
-        //echo "<pre>";
+        /*echo "<pre>";
+        var_dump($data['comments']);
+        exit;*/
         if (!empty($data['comments'])) {
             $this->load->library('pagination');
             $this->pagination->setBaseUrl(base_url());
-            $this->pagination->setTotalElements(171);
-            $this->pagination->setElementsForShow(10);
+            $this->pagination->setTotalElements(count($data['comments']));
+            $this->pagination->setElementsForShow(5);
             $this->pagination->setNumLinks(3);
             $this->pagination->setPath('index.php/comment/pagination/');
-            $this->pagination->setCurPage(12);
+            $this->pagination->setCurPage(1);
             $data['links'] = $this->pagination->createLinks();
         }
         $this->load->view('comment', $data);
     }
 
     public function pagination($page){
-        echo $page;
+        $this->load->model('comment_model');
+        $amountComments = $this->comment_model->getCommentsWithUsers();
+        $data['comments'] = [];
+        /////Количество елементов для показа
+        $elementsForShow = 5;
+        //Получаем данные с метода getCommentsLimits модели
+        if ($page == 1 ){
+            $data['comments'] = $this->comment_model->getCommentsLimits($page - 1,$elementsForShow);
+        }
+        if($page >= 2){
+            $data['comments'] = $this->comment_model->getCommentsLimits($elementsForShow * ($page - 1),$elementsForShow);
+        }
+
+        if (!empty($data['comments'])) {
+            $this->load->library('pagination');
+            $this->pagination->setBaseUrl(base_url());
+            $this->pagination->setTotalElements(count($amountComments));
+            $this->pagination->setElementsForShow($elementsForShow);
+            $this->pagination->setNumLinks(3);
+            $this->pagination->setPath('index.php/comment/pagination/');
+            $this->pagination->setCurPage($page);
+            $data['links'] = $this->pagination->createLinks();
+        }
+        $this->load->view('comment', $data);
     }
 }

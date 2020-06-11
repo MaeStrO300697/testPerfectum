@@ -55,7 +55,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
     <hr style="width: 100%; color: #f7f7f7; height: 3px; background-color:#f7f7f7;">
     <?php
-    echo "<pre>";
     foreach ($comments as $comment) {
         ?>
         <div class="card">

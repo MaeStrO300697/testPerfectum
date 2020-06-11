@@ -255,7 +255,8 @@ class CI_Pagination
             }
         }
         if ($this->getCurPage() != $amountPageLinks) {
-            $pagination .= '<li class="page-item"><a class="page-link" href="#">Next</a></li>';
+            $page = $this->getCurPage() + 1;
+            $pagination .= '<li class="page-item"><a class="page-link" href="'. $page .'">Next</a></li>';
         }
 
         $pagination .= '</ul></nav>';
