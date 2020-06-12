@@ -1,11 +1,14 @@
 <?php
+
 defined('BASEPATH') OR exit('No direct script access allowed');
+
 /**
  * Created by PhpStorm.
  * User: maestro300697
  * Date: 08.06.2020
  * Time: 00:23
  */
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,20 +27,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
         </div>
         <div class="col-8">
-            <form>
+
+            <form method="post" action="<?=base_url();?>index.php/comment/add">
                 <div class="row">
                     <div class="col">
                         <input type="text" class="form-control" id="username" name="username" placeholder="ФИО/Username">
                     </div>
                     <div class="col">
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
                     </div>
 
                 </div>
                 <div class="row mt-3">
                     <div class="col">
                         <div class="form-group">
-                            <textarea class="form-control" name="commentArea" id="commentArea" rows="3" placeholder="Текст комментария"></textarea>
+                            <textarea class="form-control" name="commentArea" id="commentArea" rows="3" placeholder="Текст комментария" required></textarea>
                         </div>
                     </div>
                 </div>

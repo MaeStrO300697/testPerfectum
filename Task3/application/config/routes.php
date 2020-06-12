@@ -53,3 +53,5 @@ $route['default_controller'] = 'comment/pagination';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route["comment/pagination/(:num)"] = "comment/pagination/$1";
+$route["comment/add"] = "comment/add";
+

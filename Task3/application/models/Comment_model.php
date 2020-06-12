@@ -69,4 +69,20 @@ class Comment_model extends CI_Model
         }
         return null;
     }
+
+    public function addComment($comment){
+        $sql = "INSERT INTO users (email, username) VALUES(?, ?)";
+        try {
+            $createUser = $this->db->query($sql, [$comment['email'], $comment['username']]);
+            if ($createUser === true) {
+                $createComment = $this->db->query("INSERT INTO comment(content, user_id) VALUES (?, LAST_INSERT_ID())", [$comment['commentArea']]);
+                if($createComment === true){
+                    return true;
+                }
+            }
+        }catch (Exception $e){
+            return null;
+        }
+        return null;
+    }
 }
