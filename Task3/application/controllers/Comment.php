@@ -41,10 +41,11 @@ class Comment extends CI_Controller
     }
 
     public function add(){
-
+        if(empty($_POST)){
+            return null;
+        }
         $this->load->library('form_validation');
 
-        $_POST['username'] = '';
         $this->form_validation->set_rules('username', 'Username', 'trim|min_length[5]|max_length[32]');
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');//
         $this->form_validation->set_rules('commentArea', 'Comment', 'required|min_length[5]|max_length[512]');
@@ -72,7 +73,8 @@ class Comment extends CI_Controller
                     $this->pagination->setCurPage(1);
                     $data['links'] = $this->pagination->createLinks();
                 }
-                $this->load->view('comment', $data);
+                //$this->load->view('comment', $data);
+                header("Location: " . base_url());
             }
         }
     }
