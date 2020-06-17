@@ -57,23 +57,6 @@ class Comment extends CI_Controller
                 $_POST['username'] = explode('@',$_POST['email'])[0];
             }
             if($this->comment_model->addComment($_POST)){
-                $amountComments = $this->comment_model->getCommentsWithUsers();
-                $data['comments'] = [];
-                /////Количество елементов для показа
-                $elementsForShow = 5;
-                //Получаем данные с метода getCommentsLimits модели
-                $data['comments'] = $this->comment_model->getCommentsLimits(0,$elementsForShow);
-                if (!empty($data['comments'])) {
-                    $this->load->library('pagination');
-                    $this->pagination->setBaseUrl(base_url());
-                    $this->pagination->setTotalElements(count($amountComments));
-                    $this->pagination->setElementsForShow($elementsForShow);
-                    $this->pagination->setNumLinks(3);
-                    $this->pagination->setPath('index.php/comment/pagination/');
-                    $this->pagination->setCurPage(1);
-                    $data['links'] = $this->pagination->createLinks();
-                }
-                //$this->load->view('comment', $data);
                 header("Location: " . base_url());
             }
         }
