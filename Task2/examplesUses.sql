@@ -41,14 +41,16 @@ SELECT messages.id, messages.content, users.username,messages.update_at FROM mes
 /*
  Запрос на получение списка всех диалогов, в которых участвует Ч1, с
 сортировкой по последнему полученному сообщению (аналог как список чатов в
-любом мессенджере) и с отображением участников диалога
+любом мессенджере) и с отображением участника диалога
  */
-SELECT chat.name,messages.content,messages.update_at FROM chat
+SELECT chat.name,messages.content,messages.update_at, users.username FROM chat
     INNER JOIN member ON chat.id = member.chat_id
     INNER JOIN messages on member.id = messages.member_id
     INNER JOIN users ON member.user_id = users.id
     WHERE users.id = 3
-    ORDER BY messages.id DESC;
+    ORDER BY messages.update_at DESC
+    LIMIT 1;
+
 
 /*
  Запрос на удаление одного сообщения в истории переписки
