@@ -8,9 +8,9 @@
         тот кто создает переписку и вторая сторона
 -- Чат для большого количества пользователей
 */
-INSERT INTO chat(name) VALUES ('Общение 5');
+INSERT INTO chat(name) VALUES ('Общение 6');
 INSERT INTO member (chat_id, user_id)
-    VALUES (LAST_INSERT_ID(),4),
+    VALUES (LAST_INSERT_ID(),9),
            (LAST_INSERT_ID(),3);
 /*
  Так как в таблице chat primary key auto increment мы можем использовать функцию LAST_INSERT_ID()
@@ -43,13 +43,13 @@ SELECT messages.id, messages.content, users.username,messages.update_at FROM mes
 сортировкой по последнему полученному сообщению (аналог как список чатов в
 любом мессенджере) и с отображением участника диалога
  */
-SELECT chat.name,messages.content,messages.update_at, users.username FROM chat
+SELECT chat.name,messages.content, MAX(messages.update_at) as update_at, users.username FROM chat
     INNER JOIN member ON chat.id = member.chat_id
     INNER JOIN messages on member.id = messages.member_id
     INNER JOIN users ON member.user_id = users.id
     WHERE users.id = 3
-    ORDER BY messages.update_at DESC
-    LIMIT 1;
+    GROUP BY chat.name
+    ORDER BY update_at DESC;
 
 
 /*
